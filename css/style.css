@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#maze-canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#input-range {
+    appearance: none;
+    display: block;
+    margin: 10px auto;
+    cursor:grab;
+    background: #8acdff;
+    height: 20px;
+    width: 400px;
+    border-radius: 10px;
+    border: solid 2px #2e2e2e;
+}
+
+.blocks {
+    display: flex;
+    width: 400px;
+    margin: 10px auto;
+}
+
+.block {
+    text-align: center;
+    color: #fff;
+    background-color: #666;
+    width: 100%;
+    margin: 0 3px;
+    padding: 50px 5px;
+    border-radius: 10px;
+}
+.block:hover {
+    cursor: pointer;
+}

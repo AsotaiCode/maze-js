@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+        <title>Maze Simulator</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+    </head>
+    <body>
+        <canvas id="maze-canvas" width="400" height="500">
+            お使いのブラウザはcanvas要素をサポートしていません。
+        </canvas>
+        <input id="input-range" type="range" min="0" max="100" value="0" step="1">
+        <div class="blocks">
+            <div id="button-s" class="block">S</div>
+            <div id="button-m" class="block">M</div>
+            <div id="button-l" class="block">L</div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
