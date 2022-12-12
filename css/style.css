@@ -17,15 +17,15 @@ body {
     margin: 10px auto;
     cursor:grab;
     background: #8acdff;
-    height: 20px;
-    width: 400px;
+    height: 40px;
+    width: 300px;
     border-radius: 10px;
     border: solid 2px #2e2e2e;
 }
 
 .blocks {
     display: flex;
-    width: 400px;
+    width: 360px;
     margin: 10px auto;
 }
 
