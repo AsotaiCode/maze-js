@@ -19,8 +19,11 @@ body {
     background: #8acdff;
     height: 40px;
     width: 300px;
-    border-radius: 10px;
+    border-radius: 20px;
     border: solid 2px #2e2e2e;
+}
+#input-range:hover {
+    background-color: rgb(125, 145, 212);
 }
 
 .blocks {
@@ -40,4 +43,5 @@ body {
 }
 .block:hover {
     cursor: pointer;
+    background-color: #8ba0b1;
 }
