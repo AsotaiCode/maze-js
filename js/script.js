@@ -10,6 +10,7 @@ const BLOCK_SIZE        = 10;
 
 const BLOCK_IMAGE_PATH  = "images/block.png";
 const FLOOR_IMAGE_PATH  = "images/floor.png";
+const ROOT_IMAGE_PATH   = "images/root.png";
 
 // 変数定義 ////////////////////////////////////////////
 
@@ -19,11 +20,14 @@ let blockImage = new Image();
 blockImage.src = BLOCK_IMAGE_PATH;
 let floorImage = new Image();
 floorImage.src = FLOOR_IMAGE_PATH;
+let rootImage = new Image();
+rootImage.src = ROOT_IMAGE_PATH;
 
 // クラス定義 ///////////////////////////////////////////
 class Maze {
     constructor() {
         this.blocks = []
+        this.root = []
         this.isCreated = false;
 
         this.blockNumX = 0;
@@ -105,8 +109,58 @@ class Maze {
                 }
             }
         }
-
         this.isCreated = true;
+
+        // 探索
+        this.search();
+    }
+    search() {
+        let dis = [];
+        for (let i = 0; i < this.blockNumY; i++) {
+            let raw = []
+            for (let j = 0; j < this.blockNumX; j++) {
+                raw.push(-1);
+            }
+            dis.push(raw);
+        }
+
+        const vecs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+        let query = [[1, 1, 0]];   // x, y, d
+        let d;
+
+        while (query.length > 0) {
+            let position = query[0];
+            query = query.slice(1);
+            dis[position[1]][position[0]] = position[2];
+            position[2]++;
+            for (const vec of vecs) {
+                let x = position[0] + vec[0];
+                let y = position[1] + vec[1];
+                if (x == this.blockNumX - 2 && y == this.blockNumY - 2) {
+                    d = position[2];
+                    break;
+                }
+                if (this.blocks[y][x] == 0 && dis[y][x] == -1) {
+                    query.push([x, y, position[2]]);
+                }
+            }
+        }
+
+        this.root = []
+        let position = [this.blockNumX - 2, this.blockNumY - 2];
+        while (!(position[0] == 1 && position[1] == 1)) {
+            this.root.unshift(position);
+            d--;
+            for (const vec of vecs) {
+                let x = position[0] + vec[0];
+                let y = position[1] + vec[1];
+                if (dis[y][x] == d) {
+                    position = [x, y];
+                    break;
+                }
+            }
+        }
+        this.root.unshift([1, 1]);
     }
     draw(ratio) {
         if (this.isCreated) {
@@ -126,6 +180,17 @@ class Maze {
                         this.blockSize,
                         this.blockSize);
                 }
+            }
+
+            let step = Math.floor(this.root.length * ratio);
+            console.log(step);
+            for (let i = 0; i < step; i++) {
+                context.drawImage(
+                    rootImage,
+                    this.offsetX + this.blockSize * this.root[i][0],
+                    this.offsetY + this.blockSize * this.root[i][1],
+                    this.blockSize,
+                    this.blockSize);
             }
         }
     }
